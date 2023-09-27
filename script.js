@@ -1,16 +1,13 @@
-const textArray = [
-    "Text 1",
-    "Text 2",
-    "Text 3",
-    "Text 4",
-    // Add more text values here
-];
-
 const changingText = document.getElementById("changing-text");
 
-function getRandomText() {
-    const randomIndex = Math.floor(Math.random() * textArray.length);
-    return textArray[randomIndex];
+function getRandomString(length) {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
 }
 
 // Show a message when the user bookmarks the page
@@ -28,5 +25,6 @@ window.onload = function () {
         e.returnValue = '';
     });
 
-    changingText.textContent = getRandomText();
+    const randomString = getRandomString(15);
+    changingText.textContent = randomString;
 };
