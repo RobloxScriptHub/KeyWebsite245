@@ -1,4 +1,5 @@
 const changingText = document.getElementById("changing-text");
+let randomString = '';
 
 function getRandomString(length) {
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -8,6 +9,12 @@ function getRandomString(length) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
+}
+
+// Function to update the text content with a new random string
+function updateRandomString() {
+    randomString = getRandomString(15);
+    changingText.textContent = randomString;
 }
 
 // Show a message when the user bookmarks the page
@@ -25,6 +32,15 @@ window.onload = function () {
         e.returnValue = '';
     });
 
-    const randomString = getRandomString(15);
-    changingText.textContent = randomString;
+    // Initialize the random string and update it every 15 seconds
+    updateRandomString();
+    setInterval(updateRandomString, 15000); // 15 seconds (15,000 milliseconds)
 };
+
+// Add this code to keep the same string if the page is refreshed within 15 seconds
+window.addEventListener('load', function () {
+    setInterval(function () {
+        updateRandomString();
+    }, 15000); // 15 seconds (15,000 milliseconds)
+});
+
